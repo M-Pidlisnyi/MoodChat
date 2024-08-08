@@ -1,22 +1,51 @@
-html {
-  font-size: 14px;
+.content {
+    margin: 20px 20px 20px 20px;
+}
+/* Chat containers */
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 50%;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Clear floats */
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Style time text */
+.time-right {
+    float: right;
+    color: #aaa;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.inputs {
+    width: fit-content;
+    margin-left: 15px;
 }
 
-body {
-  margin-bottom: 60px;
+.input-field{
+    margin: 1% 0 1% 0;
+    padding: 1% 0 2% 0;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+
+.name {
+    width: 50%;
+}
+
+.text {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 1px;
+}
+
+.signature {
+    color: #555;
+    font-size: smaller;
 }
