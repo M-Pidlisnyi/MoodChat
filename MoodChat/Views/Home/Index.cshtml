@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/site.css" type="text/css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <h1>MoodChat</h1>
+    <div class="content" id="messages">
+        <div class="container">
+            <p class="text">
+                {{message.text}}
+            </p>
+           
+            <span class="time-right">{{message.time}}</span>
+        </div>  
+     
+    </div>
+    <div class="inputs">
+
+        <br>
+        <input class="input-field" id="message-input"
+               type="text" name="message" placeholder="Message...">
+        <input class="btn btn-secondary" type="submit" value="Send" id="send-btn">
+    </div>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>
