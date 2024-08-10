@@ -1,4 +1,5 @@
 using MoodChat.Hubs;
+using System.Configuration;
 
 namespace MoodChat
 {
@@ -7,7 +8,7 @@ namespace MoodChat
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddSignalR();
+            builder.Services.AddSignalR().AddAzureSignalR();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

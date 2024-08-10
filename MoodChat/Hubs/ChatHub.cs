@@ -14,7 +14,6 @@ namespace MoodChat.Hubs
 
             string date = $"{now.Day} {month}";
             string time = $"{now:HH:mm}";
-
             await Clients.All.SendAsync("RecieveMessage", message, $"{date}\n{time}");
         }
     }

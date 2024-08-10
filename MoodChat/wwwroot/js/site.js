@@ -3,7 +3,8 @@
 
 var conn = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-conn.on("RecieveMessage", (message,datetime) => {
+
+conn.on("RecieveMessage", (message, datetime) => {
     let div_container = document.createElement("div");
     div_container.className = "container";
 
@@ -18,7 +19,9 @@ conn.on("RecieveMessage", (message,datetime) => {
     document.getElementById("messages").appendChild(div_container);
 
     p_text.textContent = message;
+
     span_time.textContent = datetime;
+
 })
 
 conn.start().then(() => { })
