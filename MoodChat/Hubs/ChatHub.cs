@@ -26,18 +26,18 @@ namespace MoodChat.Hubs
             string month = mfi.GetMonthName(now.Month);
 
             string formattedDatetime = $"{now.Day} {month} {now:HH:mm}";
-
+            var sentimentAnalysisData = gs.Analyze(message);
             var newMessage = new Models.Message
             {
                 Text = message,
                 Formatted_Date = formattedDatetime,
-                Sentiment = gs.Analyze(message).Sentiment.ToString().ToLower()
+                Sentiment = sentimentAnalysisData.Sentiment.ToString().ToLower()
             };
 
             db.Messages.Add(newMessage);
             db.SaveChanges();
 
-            await Clients.All.SendAsync("RecieveMessage", newMessage.Text, newMessage.Formatted_Date, newMessage.Sentiment);
+            await Clients.All.SendAsync("RecieveMessage", newMessage.Text, newMessage.Formatted_Date, newMessage.Sentiment, sentimentAnalysisData.ToString());
         }
     }
 }

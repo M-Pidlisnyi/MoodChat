@@ -57,6 +57,13 @@
 .negative {
     background: #ffadad;
 }
+.mixed {
+    background:#d6d6ad 
+}
+    
+.neutral {
+    background: #d0d0d0
+}
 
 #send-btn {
     padding: 1%;
