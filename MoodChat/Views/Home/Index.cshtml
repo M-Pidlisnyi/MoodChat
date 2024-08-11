@@ -19,14 +19,10 @@
         
         @foreach (var message in Model)
         {
-            <div class="container">
+            <div class="container  @message.Sentiment">
                 <p class="text">
                     @message.Text
                 </p>
-                @if (message.Sentiment != null)
-                {
-                    <p>@message.Sentiment</p>
-                }
                 <span class="time-right"> @message.Formatted_Date </span>
 
             </div>
