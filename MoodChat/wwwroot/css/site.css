@@ -6,7 +6,7 @@
     border: 2px solid #dedede;
     background-color: #f1f1f1;
     border-radius: 5px;
-    margin: 10px 0;
+    margin: 5px 0;
     width: 50%;
 }
 
@@ -20,19 +20,20 @@
 /* Style time text */
 .time-right {
     float: right;
-    color: #aaa;
+    color: #999;
 }
 
 .inputs {
-    width: fit-content;
-    margin-left: 15px;
+    width: 100%;
+    
 }
 
 .input-field{
-    margin: 1% 0 1% 0;
-    padding: 1% 0 2% 0;
+    margin: 1% 0 1% 10%;
+    padding: 1% 0 1% 0;
     border: 2px solid gray;
     border-radius: 5px;
+    width: 75%;
 }
 
 .name {
@@ -48,4 +49,16 @@
 .signature {
     color: #555;
     font-size: smaller;
+}
+
+.positive {
+    background: #adffad;
+}
+.negative {
+    background: #ffadad;
+}
+
+#send-btn {
+    padding: 1%;
+    margin-bottom: 1px;
 }
