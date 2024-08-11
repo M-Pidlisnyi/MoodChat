@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using MoodChat.Contexts;
-using MoodChat.Hubs;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MoodChat.Controllers
 {
@@ -17,7 +14,7 @@ namespace MoodChat.Controllers
 
         public  IActionResult Index()
         {
-            var messages = db.Messages.ToList();
+            var messages = db.Messages.OrderByDescending(m => m.Id).Take(5).OrderBy(m => m.Id);
 
             return View(messages);
         }

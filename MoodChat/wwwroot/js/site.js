@@ -25,6 +25,7 @@ conn.on("RecieveMessage", (message, datetime, sentiment) => {
     s.textContent = sentiment;
     span_time.textContent = datetime;
 
+    location.reload(true)
 })
         
 
@@ -36,4 +37,5 @@ document.getElementById("send-btn").addEventListener("click", event => {
     conn.invoke("SendMessage", message);
     event.preventDefault();
     document.getElementById("message-input").value = "";
+    location.reload(true);
 })

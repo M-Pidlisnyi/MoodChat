@@ -1,4 +1,4 @@
-﻿@model List<MoodChat.Models.Message>
+﻿@model IQueryable<MoodChat.Models.Message>
 @{
     Layout = null;
     
@@ -36,9 +36,9 @@
     <div class="inputs">
 
         <br>
-        <input class="input-field" id="message-input"
-               type="text" name="message" placeholder="Message...">
-        <input class="btn btn-secondary" type="submit" value="Send" id="send-btn">
+            <input class="input-field" id="message-input"
+                   type="text" name="message" placeholder="Message...">
+            <input class="btn btn-secondary" type="submit" value="Send" id="send-btn">    
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="~/js/site.js"></script>
