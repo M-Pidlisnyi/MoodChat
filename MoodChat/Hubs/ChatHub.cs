@@ -1,10 +1,20 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using MoodChat.Contexts;
 using System.Globalization;
 
 namespace MoodChat.Hubs
 {
     public class ChatHub: Hub
     {
+
+        private readonly MoodChatContext db;
+
+        public ChatHub(MoodChatContext db)
+        {
+            this.db = db;
+        }
+
+
         public async Task SendMessage(string message)
         {
             var now = DateTime.Now;
@@ -12,10 +22,19 @@ namespace MoodChat.Hubs
             var mfi = new DateTimeFormatInfo();
             string month = mfi.GetMonthName(now.Month);
 
-            string date = $"{now.Day} {month}";
-            string time = $"{now:HH:mm}";
+            string formattedDatetime = $"{now.Day} {month} {now:HH:mm}";
 
-            await Clients.All.SendAsync("RecieveMessage", message, $"{date}\n{time}");
+            var newMessage = new Models.Message
+            {
+                Text = message,
+                Formatted_Date = formattedDatetime,
+                Sentiment = "neutral"
+            };
+
+            db.Messages.Add(newMessage);
+            db.SaveChanges();
+
+            await Clients.All.SendAsync("RecieveMessage", newMessage.Text, newMessage.Formatted_Date, newMessage.Sentiment);
         }
     }
 }
