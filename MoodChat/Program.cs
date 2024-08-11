@@ -1,4 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using MoodChat.Hubs;
+using MoodChat.Contexts;
+using System;
 using System.Configuration;
 
 namespace MoodChat
@@ -10,6 +13,10 @@ namespace MoodChat
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddSignalR().AddAzureSignalR();
             builder.Services.AddControllersWithViews();
+            
+            builder.Services.AddDbContext<MoodChatContext>(
+                    options =>  options.UseSqlServer("name=AzureSQLDB:ConnectionString")
+                );
    
             var app = builder.Build();
 
