@@ -3,6 +3,7 @@ using MoodChat.Hubs;
 using MoodChat.Contexts;
 using System;
 using System.Configuration;
+using MoodChat.Services;
 
 namespace MoodChat
 {
@@ -17,7 +18,25 @@ namespace MoodChat
             builder.Services.AddDbContext<MoodChatContext>(
                     options =>  options.UseSqlServer("name=AzureSQLDB:ConnectionString")
                 );
-   
+
+          
+
+            string? keySecret = builder.Configuration["SentimentAnalysisKey1"];
+            string? endpointSecret = builder.Configuration["SentimentAnalysisEndpoint"];
+
+
+            if ( keySecret == null || endpointSecret == null)
+            {
+                throw new Exception(message: $"Either API Key or Endpoint is null");
+            }
+            else { 
+                builder.Services.AddTransient(
+                        service => new CognitiveService(keySecret, endpointSecret)
+                    );
+
+            }
+
+
             var app = builder.Build();
 
             app.UseStaticFiles();

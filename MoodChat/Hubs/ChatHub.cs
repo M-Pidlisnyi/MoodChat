@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using MoodChat.Contexts;
+using MoodChat.Services;
 using System.Globalization;
 
 namespace MoodChat.Hubs
@@ -8,10 +9,12 @@ namespace MoodChat.Hubs
     {
 
         private readonly MoodChatContext db;
+        private readonly CognitiveService gs;
 
-        public ChatHub(MoodChatContext db)
+        public ChatHub(MoodChatContext db, CognitiveService gs)
         {
             this.db = db;
+            this.gs = gs;
         }
 
 
@@ -28,7 +31,7 @@ namespace MoodChat.Hubs
             {
                 Text = message,
                 Formatted_Date = formattedDatetime,
-                Sentiment = "neutral"
+                Sentiment = gs.Analyze(message).Sentiment.ToString().ToLower()
             };
 
             db.Messages.Add(newMessage);
