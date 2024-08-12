@@ -19,28 +19,26 @@ namespace MoodChat
                     options =>  options.UseSqlServer("name=AzureSQLDB:ConnectionString")
                 );
 
-          
 
-            string? keySecret = builder.Configuration["SentimentAnalysisKey1"];
+            string? keySecret = builder.Configuration["SentimentAnalysisKey1"];//SentimentAnalysisKey2 may be used as well
             string? endpointSecret = builder.Configuration["SentimentAnalysisEndpoint"];
 
-
-            if ( keySecret == null || endpointSecret == null)
+            if (keySecret == null)
             {
-                throw new Exception(message: $"Either API Key or Endpoint is null");
+                throw new Exception("API Key cannot be null.");
             }
-            else { 
-                builder.Services.AddTransient(
-                        service => new CognitiveService(keySecret, endpointSecret)
-                    );
-
+            if (endpointSecret == null)
+            {
+                throw new Exception("Endpoint cannot be null.");
             }
 
+            builder.Services.AddTransient(
+                service => new CognitiveService(keySecret, endpointSecret)
+            );
 
             var app = builder.Build();
 
             app.UseStaticFiles();
-
             app.MapHub<ChatHub>("/chathub");
             app.MapControllerRoute(name: "index", pattern: "{controller=Home}/{action=Index}");
             app.Run();
